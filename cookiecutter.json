@@ -2,10 +2,27 @@
   "author": "Duy Nguyen",
   "email": "57234880+duynguyen158@users.noreply.github.com",
   "github_owner": "duynguyen158",
-  "license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
-  "project_description": "An example Python project.",
   "project_name": "example-python-project",
   "project_slug": "{{cookiecutter.project_name|lower|replace('-', '_')}}",
+  "project_description": "An example Python project.",
   "python_version": "3.12.7",
-  "use_gcloud": false
+  "license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
+  "use_infrastructure": false,
+  "use_gcloud": false,
+  "gcp_project_id": null,
+  "gcp_project_number": null,
+  "__prompts__": {
+    "author": "Author name",
+    "email": "Author email",
+    "github_owner": "GitHub username",
+    "project_name": "Project name",
+    "project_slug": "Project slug",
+    "project_description": "Short project description",
+    "python_version": "Python version",
+    "license": "License type",
+    "use_infrastructure": "Include Terraform infrastructure-as-code?",
+    "use_gcloud": "Use Google Cloud SDK?",
+    "gcp_project_id": "GCP project ID (skip if not using gcloud)",
+    "gcp_project_number": "GCP project number (skip if not using gcloud)"
+  }
 }
