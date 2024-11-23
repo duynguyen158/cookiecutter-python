@@ -1,4 +1,4 @@
-# Duy's Cookiecutter Template
+# Duy's Python Cookiecutter Template
 
 ## Usage
 You need to have cookiecutter installed (using the [official installation instructions](https://cookiecutter.readthedocs.io/en/stable/installation.html) or [Homebrew](https://formulae.brew.sh/formula/cookiecutter)) to use this template. 
