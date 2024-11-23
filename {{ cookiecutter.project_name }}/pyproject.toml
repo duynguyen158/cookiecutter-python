@@ -1,0 +1,42 @@
+[project]
+name = "{{ cookiecutter.project_name }}"
+version = "0.1.0"
+description = "{{ cookiecutter.project_description }}"
+authors = [
+    {name = "{{ cookiecutter.author }}", email = "{{ cookiecutter.email }}"}
+]
+readme = "README.md"
+requires-python = "{{ cookiecutter.python_version }}"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.3",
+]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle
+    "F", # Pyflakes
+    "UP", # pyupgrade
+    "B", # flake8-bugbear
+    "SIM", # flake8-simplify
+    "I", # isort
+]
+ignore = [
+    "E501", # line too long
+]
+
+# If specifying known third-party packages is useful, e.g., so that isort works correctly, uncomment and fill in the list below.
+# [tool.ruff.lint.isort]
+# known-third-party = []
+
+[tool.pyright]
+venvPath = "."
+venv = "./.venv"
+include = ["{{ cookiecutter.project_slug }}", "tests"]
+typeCheckingMode = "strict"
+reportUnknownVariableType = false
+reportUnknownMemberType = false
+reportUnknownLambdaType = false
+reportUnknownArgumentType = false
