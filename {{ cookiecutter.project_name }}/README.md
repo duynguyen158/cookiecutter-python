@@ -1,7 +1,6 @@
 # {{ cookiecutter.project_name }}
 
 [![Python version](https://img.shields.io/badge/python_version-{{ cookiecutter.python_version|truncate(4,True,'', 0) }}-blue)](https://github.com/psf/black)
-[![License](https://img.shields.io/github/license/{{ cookiecutter.github_owner }}/{{ cookiecutter.project_name }})](https://img.shields.io/github/license/{{ cookiecutter.github_owner }}/{{ cookiecutter.project_name }})
 
 {{ cookiecutter.project_description }}
 
