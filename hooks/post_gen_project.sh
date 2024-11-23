@@ -9,5 +9,5 @@ mkdir -p infrastructure/modules/example/main.tf
 echo "🎉🎉🎉 Project created! 🎉🎉🎉"
 echo "You can add the following alias to your .zshrc or .bashrc to run commands installed in compose.yaml (such as uv) more easily:"
 echo ""
-echo "# Docker Compose"
+echo "# Docker Compose Run alias"
 echo 'alias dcr="docker compose run --rm"'
