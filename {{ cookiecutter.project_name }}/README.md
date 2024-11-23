@@ -26,7 +26,9 @@ echo '# Docker Compose Run alias\nalias dcr="docker compose run --rm"' >> ~/.zsh
 source ~/.zshrc
 ```
 
-Now, for example, you can run `dcr uv --help` to see the `uv` CLI help message, which includes how to add a new Python dependency or run a Python script.
+Now, for example, you can run `dcr uv --help` to see the `uv` CLI help message, which includes how to add a new Python dependency or run a Python script. 
+
+Makefile recipes uses `docker compose run` under the hood. To rebuild the containers behind the services specified in `compose.yaml` before running a recipe, run `make BUILD=1 <recipe>`.
 
 ### Code formatting
 Applies to Python and (if applicable) Terraform code.
