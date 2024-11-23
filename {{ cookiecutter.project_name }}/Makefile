@@ -18,7 +18,7 @@ help: # Show help for each of the Makefile recipes
 
 # SETTING UP
 .PHONY: login login-% install install-% setup
-	
+
 login-gcloud: # Login to GCP
 {%- if cookiecutter.use_gcloud %}
 	-docker compose run$(if $(filter 1,$(BUILD)), --build) --rm gcloud auth application-default login 2>/dev/null
@@ -26,21 +26,21 @@ login-gcloud: # Login to GCP
 {%- else %}
 	@echo "GCP is not enabled in this project."
 {%- endif %}
-	
+
 login: login-gcloud # Login to all services
-	
+
 install-terraform: # Initialize Terraform
 {%- if cookiecutter.use_infrastructure %}
 	ENVIRONMENT=$(ENVIRONMENT) docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform init 2>/dev/null
 {%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
-	
+
 install-python: # Install Python packages
 	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv sync 2>/dev/null
 
 install: install-terraform install-python # Install all dependencies
-	
+
 setup: login install # Setup the project
 
 # DEVELOPMENT
