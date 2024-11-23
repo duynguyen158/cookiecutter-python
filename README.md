@@ -11,4 +11,4 @@ and follow the prompts.
 
 ## Development
 ### Configuring whitespace
-This [web page](https://j2live.ttl255.com/) is useful for visualizing Jinja2 rendered whitespace. Just add `{ "cookiecutter": <cookiecutter.json content> } to the Jinja2 data field.
+This [web page](https://j2live.ttl255.com/) is useful for visualizing Jinja2 rendered whitespace. Just add `{ "cookiecutter": <cookiecutter.json content> }` to the Jinja2 data field.
