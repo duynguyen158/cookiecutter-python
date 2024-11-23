@@ -5,13 +5,14 @@
 # Whether to rebuild the Docker images before running the command
 BUILD?=0
 ENVIRONMENT?=prod
-{% if cookiecutter.use_gcloud %}
+{%- if cookiecutter.use_gcloud %}
 GCP_PROJECT_ID={{ cookiecutter.gcp_project_id }}
 GCP_PROJECT_NUMBER={{ cookiecutter.gcp_project_number }}
-{% endif %}
+{%- endif %}
 
 all: help
 	@echo "Please specify a target."
+
 help: # Show help for each of the Makefile recipes
 	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
 
@@ -19,21 +20,21 @@ help: # Show help for each of the Makefile recipes
 .PHONY: login login-% install install-% setup
 	
 login-gcloud: # Login to GCP
-{% if cookiecutter.use_gcloud %}
+{%- if cookiecutter.use_gcloud %}
 	-docker compose run$(if $(filter 1,$(BUILD)), --build) --rm gcloud auth application-default login 2>/dev/null
 	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm gcloud config set project newsroom-genai-dev 2>/dev/null
-{% else %}
+{%- else %}
 	@echo "GCP is not enabled in this project."
-{% endif %}
+{%- endif %}
 	
 login: login-gcloud # Login to all services
 	
 install-terraform: # Initialize Terraform
-{% if cookiecutter.use_infrastructure %}
+{%- if cookiecutter.use_infrastructure %}
 	ENVIRONMENT=$(ENVIRONMENT) docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform init 2>/dev/null
-{% else %}
+{%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
-{% endif %}
+{%- endif %}
 	
 install: install-terraform # Install all dependencies
 	
@@ -42,19 +43,19 @@ setup: login install # Setup the project
 # DEVELOPMENT
 .PHONY: format format-% lint lint-% test test-%
 format-terraform: # Format Terraform code
-{% if cookiecutter.use_infrastructure %}
+{%- if cookiecutter.use_infrastructure %}
 	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform -chdir=../.. fmt -recursive 2>/dev/null
-{% else %}
+{%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
-{% endif %}
+{%- endif %}
 
 format: format-terraform # Format all code
 
 lint-terraform: # Validate Terraform code
-{% if cookiecutter.use_infrastructure %}
+{%- if cookiecutter.use_infrastructure %}
 	ENVIRONMENT=$(ENVIRONMENT) docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform validate 2>/dev/null
-{% else %}
+{%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
-{% endif %}
+{%- endif %}
 	
 lint: lint-terraform # Lint (validate) all code

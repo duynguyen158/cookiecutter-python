@@ -15,20 +15,22 @@ services:
     working_dir: /app
     entrypoint: ["uv"]
 
-{% if cookiecutter.use_infrastructure %}
+{%- if cookiecutter.use_infrastructure %}
+
   # Terraform is the infrastructure-as-code tool
   terraform:
     image: hashicorp/terraform:1.9.8
     volumes:
       - ./infrastructure:/infrastructure
-{% if cookiecutter.use_gcloud %}
+{%- if cookiecutter.use_gcloud %}
       - ~/.config/gcloud:/root/.config/gcloud
-{% endif %}
+{%- endif %}
     working_dir: /infrastructure
     entrypoint: ["terraform"]
+{%- endif %}
 
-{% endif %}
-{% if cookiecutter.use_gcloud %}
+{%- if cookiecutter.use_gcloud %}
+
   # Google Cloud CLI
   gcloud:
     profiles:
@@ -37,5 +39,4 @@ services:
     volumes:
       - ~/.config/gcloud:/root/.config/gcloud
     entrypoint: ["gcloud"]
-
-{% endif %}
+{%- endif %}
