@@ -44,3 +44,5 @@ make lint
 
 ## Deployment
 **TODO: Describe how your project is deployed.**
+
+_This project was created using [Duy Nguyen's cookiecutter template](https://github.com/duynguyen158/cookiecutter-python)._
