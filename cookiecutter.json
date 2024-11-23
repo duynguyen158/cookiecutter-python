@@ -1,0 +1,10 @@
+{
+  "author": "Duy Nguyen",
+  "email": "57234880+duynguyen158@users.noreply.github.com",
+  "github_owner": "duynguyen158",
+  "license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
+  "project_description": "An example Python project.",
+  "project_name": "example-python-project",
+  "project_slug": "{{cookiecutter.project_name|lower|replace('-', '_')}}",
+  "python_version": "3.12.7"
+}
