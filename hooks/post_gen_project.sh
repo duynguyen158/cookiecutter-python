@@ -11,6 +11,8 @@ rm LICENSE
 {% endif %}
 
 echo "🎉🎉🎉 Project created! 🎉🎉🎉"
+echo "Go to the project directory with 'cd {{ cookiecutter.project_slug }}' and start developing!"
+echo ""
 echo "You can add the following alias to your .zshrc or .bashrc to run commands installed in compose.yaml (such as uv) more easily:"
 echo ""
 echo "# Docker Compose Run alias"
