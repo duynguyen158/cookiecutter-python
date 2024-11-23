@@ -1,0 +1,16 @@
+.*
+
+# Docker
+!.dockerignore
+
+# Git
+!.gitignore
+
+# GitHub
+!.github
+
+# Python
+__pycache__
+
+# uv
+!.python-version
