@@ -36,7 +36,10 @@ install-terraform: # Initialize Terraform
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
 	
-install: install-terraform # Install all dependencies
+install-python: # Install Python packages
+	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv sync 2>/dev/null
+
+install: install-terraform install-python # Install all dependencies
 	
 setup: login install # Setup the project
 
@@ -50,7 +53,11 @@ format-terraform: # Format Terraform code
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
 
-format: format-terraform # Format all code
+format-python: # Format Python code
+	-docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv tool run ruff format 2>/dev/null
+	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv tool run ruff check --fix 2>/dev/null
+
+format: format-terraform format-python # Format all code
 
 lint-terraform: # Validate Terraform code
 {%- if cookiecutter.use_infrastructure %}
@@ -58,5 +65,13 @@ lint-terraform: # Validate Terraform code
 {%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
-	
-lint: lint-terraform # Lint (validate) all code
+
+lint-python: # Check for Python type errors
+	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv tool run pyright 2>/dev/null
+
+lint: lint-terraform lint-python # Lint (validate) all code
+
+test-python: # Run Python tests
+	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv run pytest 2>/dev/null
+
+test: test-python # Run all tests
