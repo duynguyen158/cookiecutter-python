@@ -42,6 +42,7 @@ setup: login install # Setup the project
 
 # DEVELOPMENT
 .PHONY: format format-% lint lint-% test test-%
+
 format-terraform: # Format Terraform code
 {%- if cookiecutter.use_infrastructure %}
 	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform -chdir=../.. fmt -recursive 2>/dev/null
