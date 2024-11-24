@@ -5,6 +5,7 @@ services:
       - dev
     image: {{ cookiecutter.project_name }}/uv:latest
     environment:
+      - PYTHONPATH=/app
       - UV_LINK_MODE=copy
       - UV_TOOL_BIN_DIR=/usr/local/bin
     build:
