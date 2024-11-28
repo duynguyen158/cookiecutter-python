@@ -27,9 +27,10 @@ ignore = [
     "E501", # line too long
 ]
 
+[tool.ruff.lint.isort]
 # If specifying known third-party packages is useful, e.g., so that isort works correctly, uncomment and fill in the list below.
-# [tool.ruff.lint.isort]
 # known-third-party = []
+combine-as-imports = true
 
 [tool.pyright]
 venvPath = "."
