@@ -15,10 +15,10 @@ rm LICENSE
 cp .env.example .env && echo ".env file created."
 cp .envrc.example .envrc && echo ".envrc file created."
 {% else %}
-rm .env.example
-rm .envrc.example
 rm shell.nix
 {% endif %}
+rm .env.example
+rm .envrc.example
 
 echo "🎉🎉🎉 Project created! 🎉🎉🎉"
 echo "Go to the project directory with 'cd {{ cookiecutter.project_slug }}' and start developing!"
