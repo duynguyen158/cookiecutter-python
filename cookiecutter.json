@@ -23,7 +23,7 @@
     "open_source_license": "License type",
     "use_infrastructure": "Include Terraform infrastructure-as-code?",
     "use_gcloud": "Use Google Cloud SDK?",
-    "use_nix_direnv": "Use [nix-direnv](https://determinate.systems/posts/nix-direnv/) to manage dev environment, including system dependencies like uv?",
+    "use_nix_direnv": "Use nix-direnv (https://determinate.systems/posts/nix-direnv/) to manage dev environment, including system dependencies like uv?",
     "gcp_project_id": "GCP project ID (skip if not using gcloud)",
     "gcp_project_number": "GCP project number (skip if not using gcloud)"
   }
