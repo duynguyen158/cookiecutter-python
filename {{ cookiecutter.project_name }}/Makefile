@@ -9,6 +9,9 @@ ENVIRONMENT?=prod
 GCP_PROJECT_ID={{ cookiecutter.gcp_project_id }}
 GCP_PROJECT_NUMBER={{ cookiecutter.gcp_project_number }}
 {%- endif %}
+{%- if cookiecutter.use_infrastructure %}
+PATH_TERRAFORM_ENVIRONMENT=$(PWD)/infrastructure/environments/$(ENVIRONMENT)
+{%- endif %}
 
 all: help
 	@echo "Please specify a target."
@@ -21,8 +24,8 @@ help: # Show help for each of the Makefile recipes
 
 login-gcloud: # Login to GCP
 {%- if cookiecutter.use_gcloud %}
-	-docker compose run$(if $(filter 1,$(BUILD)), --build) --rm gcloud auth application-default login 2>/dev/null
-	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm gcloud config set project newsroom-genai-dev 2>/dev/null
+	-gcloud auth application-default login
+	gcloud config set project newsroom-genai-dev
 {%- else %}
 	@echo "GCP is not enabled in this project."
 {%- endif %}
@@ -31,13 +34,17 @@ login: login-gcloud # Login to all services
 
 install-terraform: # Initialize Terraform
 {%- if cookiecutter.use_infrastructure %}
-	ENVIRONMENT=$(ENVIRONMENT) docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform init 2>/dev/null
+	terraform -chdir=$(PATH_TERRAFORM_ENVIRONMENT) init
 {%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
 
 install-python: # Install Python packages
-	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv sync 2>/dev/null
+	uv sync --all-groups
+	uv tool install ruff --upgrade
+	uvx ruff --version
+	uv tool install pyright --upgrade
+	uvx pyright --version
 
 install: install-terraform install-python # Install all dependencies
 
@@ -48,30 +55,43 @@ setup: login install # Setup the project
 
 format-terraform: # Format Terraform code
 {%- if cookiecutter.use_infrastructure %}
-	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform -chdir=../.. fmt -recursive 2>/dev/null
+	terraform -chdir=../.. fmt -recursive
 {%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
 
 format-python: # Format Python code
-	-docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv tool run ruff format 2>/dev/null
-	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv tool run ruff check --fix 2>/dev/null
+	-uv tool run ruff format
+	uv tool run ruff check --fix
 
 format: format-terraform format-python # Format all code
 
 lint-terraform: # Validate Terraform code
 {%- if cookiecutter.use_infrastructure %}
-	ENVIRONMENT=$(ENVIRONMENT) docker compose run$(if $(filter 1,$(BUILD)), --build) --rm terraform validate 2>/dev/null
+	terraform -chdir=$(PATH_TERRAFORM_ENVIRONMENT) validate
 {%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
 
 lint-python: # Check for Python type errors
-	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv tool run pyright 2>/dev/null
+	uv tool run pyright
 
 lint: lint-terraform lint-python # Lint (validate) all code
 
 test-python: # Run Python tests
-	docker compose run$(if $(filter 1,$(BUILD)), --build) --rm uv run pytest 2>/dev/null
+	uv run pytest
 
 test: test-python # Run all tests
+
+# DEPLOYMENT
+{%- if cookiecutter.use_infrastructure %}
+plan-infra: # Plan Terraform infrastructure
+	terraform -chdir=$(PATH_TERRAFORM_ENVIRONMENT) plan
+
+apply-infra: # Apply Terraform infrastructure
+	terraform -chdir=$(PATH_TERRAFORM_ENVIRONMENT) apply
+
+destroy-infra: # Destroy Terraform infrastructure
+	terraform -chdir=$(PATH_TERRAFORM_ENVIRONMENT) destroy
+
+{%- endif %}
