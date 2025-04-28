@@ -2,7 +2,7 @@
 
 [![Python version](https://img.shields.io/badge/python_version-{{ cookiecutter.python_version|truncate(4,True,'', 0) }}-blue)](https://github.com/psf/black)
 
-{{- cookiecutter.project_description }}
+{{ cookiecutter.project_description }}
 
 ## Usage
 **TODO: Describe how to use your project! Is it a library? A CLI? A web app?**
