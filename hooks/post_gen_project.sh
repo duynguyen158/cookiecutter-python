@@ -10,10 +10,18 @@ mkdir -p infrastructure/modules/example/main.tf
 rm LICENSE
 {% endif %}
 
+# Development environment setup
+{% if cookiecutter.use_nix_direnv %}
+cp .env.example .env && echo ".env file created."
+cp .envrc.example .envrc && echo ".envrc file created."
+{% else %}
+rm .env.example
+rm .envrc.example
+rm shell.nix
+{% endif %}
+
 echo "🎉🎉🎉 Project created! 🎉🎉🎉"
 echo "Go to the project directory with 'cd {{ cookiecutter.project_slug }}' and start developing!"
-echo ""
-echo "You can add the following alias to your .zshrc or .bashrc to run commands installed in compose.yaml (such as uv) more easily:"
-echo ""
-echo "# Docker Compose Run alias"
-echo 'alias dcr="docker compose run --rm"'
+{% if cookiecutter.use_nix_direnv %}
+echo "Run 'direnv allow' to activate the dev environment."
+{% endif %}

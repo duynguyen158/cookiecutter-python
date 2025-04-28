@@ -9,6 +9,7 @@
   "open_source_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
   "use_infrastructure": false,
   "use_gcloud": false,
+  "use_nix_direnv": false,
   "gcp_project_id": "no-project",
   "gcp_project_number": "123456789",
   "__prompts__": {
@@ -22,6 +23,7 @@
     "open_source_license": "License type",
     "use_infrastructure": "Include Terraform infrastructure-as-code?",
     "use_gcloud": "Use Google Cloud SDK?",
+    "use_nix_direnv": "Use [nix-direnv](https://determinate.systems/posts/nix-direnv/) to manage dev environment, including system dependencies like uv?",
     "gcp_project_id": "GCP project ID (skip if not using gcloud)",
     "gcp_project_number": "GCP project number (skip if not using gcloud)"
   }
