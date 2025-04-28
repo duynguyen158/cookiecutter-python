@@ -2,8 +2,8 @@
 
 {% if cookiecutter.use_infrastructure %}
 # Infrastructure-as-code
-mkdir -p infrastructure/environments/prod/main.tf
-mkdir -p infrastructure/modules/example/main.tf
+mkdir -p infrastructure/environments/prod && touch infrastructure/environments/prod/main.tf
+mkdir -p infrastructure/modules/example && touch infrastructure/modules/example/main.tf
 {% endif %}
 
 {% if cookiecutter.open_source_license == "Not open source" %}
