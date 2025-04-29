@@ -55,7 +55,7 @@ setup: login install # Setup the project
 
 format-terraform: # Format Terraform code
 {%- if cookiecutter.use_infrastructure %}
-	terraform -chdir=../.. fmt -recursive
+	terraform -chdir=infrastructure fmt -recursive
 {%- else %}
 	@echo "Terraform infrastructure-as-code is not enabled in this project."
 {%- endif %}
