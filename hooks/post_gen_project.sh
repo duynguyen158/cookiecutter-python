@@ -21,7 +21,7 @@ rm .env.example
 rm .envrc.example
 
 echo "🎉🎉🎉 Project created! 🎉🎉🎉"
-echo "Go to the project directory with 'cd {{ cookiecutter.project_slug }}' and start developing!"
+echo "Go to the project directory with 'cd {{ cookiecutter.project_name }}' and start developing!"
 {% if cookiecutter.use_nix_direnv %}
 echo "Run 'direnv allow' to activate the dev environment."
 {% endif %}
