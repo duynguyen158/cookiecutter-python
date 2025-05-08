@@ -3,7 +3,6 @@
 
 # VARIABLES
 # Whether to rebuild the Docker images before running the command
-BUILD?=0
 ENVIRONMENT?=prod
 {%- if cookiecutter.use_gcloud %}
 GCP_PROJECT_ID={{ cookiecutter.gcp_project_id }}
