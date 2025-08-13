@@ -98,7 +98,7 @@ to see the infrastructure changes that will be applied.
 
 Then, when you're ready to apply the changes, run
 ```zsh
-make deploy-infra
+make apply-infra
 ```
 {%- else %}
 **TODO: Describe how your project is deployed.**
