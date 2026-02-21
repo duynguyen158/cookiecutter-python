@@ -1,5 +1,5 @@
 let
-    nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-unstable";
+    nixpkgs = fetchTarball "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     pkgs = import nixpkgs { 
         config = {
             allowUnfree = true;
