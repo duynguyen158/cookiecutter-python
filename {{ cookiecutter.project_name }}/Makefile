@@ -24,7 +24,7 @@ help: # Show help for each of the Makefile recipes
 login-gcloud: # Login to GCP
 {%- if cookiecutter.use_gcloud %}
 	-gcloud auth application-default login
-	gcloud config set project newsroom-genai-dev
+	gcloud config set project $(GCP_PROJECT_ID)
 {%- else %}
 	@echo "GCP is not enabled in this project."
 {%- endif %}
