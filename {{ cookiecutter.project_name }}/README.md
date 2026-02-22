@@ -69,4 +69,5 @@ make apply-infra
 **TODO: Describe how your project is deployed.**
 {%- endif %}
 
-_This project was created using [Duy Nguyen's cookiecutter template](https://github.com/duynguyen158/cookiecutter-python)._
+---
+This project was created using [Duy Nguyen's cookiecutter template](https://github.com/duynguyen158/cookiecutter-python). It includes an `AGENTS.md` file to provide context and instructions for AI coding agents.
