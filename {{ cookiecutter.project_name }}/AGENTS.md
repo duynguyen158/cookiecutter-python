@@ -17,6 +17,14 @@ When working on this project, use these commands via the `Makefile`:
 - **Infrastructure Apply**: `make apply-infra` (Runs terraform apply).
 {%- endif %}
 
+## Agent Workflow
+After making any changes to Python code, you **MUST**:
+
+1.  Run `make format` to ensure code style consistency.
+2.  Run `make lint` to verify type safety and catch errors.
+
+If either command returns an error or warning, you must fix the issues before considering the task complete.
+
 ## Project Structure
 - `src/`: Main source code directory.
 - `tests/`: Project test suite.
